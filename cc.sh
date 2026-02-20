@@ -7,7 +7,7 @@ bold="$(tput bold)"
 green="$(tput setaf 2)"
 cyan="$(tput setaf 6)"
 magenta="$(tput setaf 5)"
-blue="$(tput setaf 13)"
+blue="$(tput setaf 6)"
 yellow="$(tput setaf 3)"
 white="$(tput setaf 7)"
 
@@ -23,7 +23,7 @@ row() {
   local content="$1"
   local visible_len="$2"   # number of visible characters in content
   local pad=$(( INNER - 1 - visible_len ))  # 1 for leading space
-  printf "${blue}│${reset} %s%*s${blue}│${reset}\n" "$content" "$pad" ""
+  printf "${cyan}│${reset} %s%*s${blue}│${reset}\n" "$content" "$pad" ""
 }
 
 # -------- header --------
@@ -47,7 +47,7 @@ empty
 
 while IFS= read -r line; do
   # Pad/trim to exactly INNER-1 visible chars (leave 1 for leading space in row())
-  printf "${blue}│${reset} ${cyan}${bold}%-*.*s${reset}${blue}│${reset}\n" \
+  printf "${cyan}│${reset} ${magenta}${bold}%-*.*s${reset}${blue}│${reset}\n" \
     $((INNER - 1)) $((INNER - 1)) "$line"
 done <<< "$HEADER"
 
