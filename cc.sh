@@ -7,22 +7,23 @@ bold="$(tput bold)"
 green="$(tput setaf 2)"
 cyan="$(tput setaf 6)"
 magenta="$(tput setaf 5)"
+blue="$(tput setaf 13)"
 yellow="$(tput setaf 3)"
 white="$(tput setaf 7)"
 
-INNER=81   # visible characters between the borders
+INNER=82   # visible characters between the borders
 
-top()   { printf "${green}┌"; printf '─%.0s' $(seq 1 $INNER); printf "┐${reset}\n"; }
-mid()   { printf "${green}├"; printf '─%.0s' $(seq 1 $INNER); printf "┤${reset}\n"; }
-bot()   { printf "${green}└"; printf '─%.0s' $(seq 1 $INNER); printf "┘${reset}\n"; }
-empty() { printf "${green}│$(printf '%*s' $INNER '')│${reset}\n"; }
+top()   { printf "${blue}┌"; printf '─%.0s' $(seq 1 $INNER); printf "┐${reset}\n"; }
+mid()   { printf "${blue}├"; printf '─%.0s' $(seq 1 $INNER); printf "┤${reset}\n"; }
+bot()   { printf "${blue}└"; printf '─%.0s' $(seq 1 $INNER); printf "┘${reset}\n"; }
+empty() { printf "${blue}│$(printf '%*s' $INNER '')│${reset}\n"; }
 
 # Print a row: content is passed pre-coloured; visible_len is the printable width
 row() {
   local content="$1"
   local visible_len="$2"   # number of visible characters in content
   local pad=$(( INNER - 1 - visible_len ))  # 1 for leading space
-  printf "${green}│${reset} %s%*s${green}│${reset}\n" "$content" "$pad" ""
+  printf "${blue}│${reset} %s%*s${blue}│${reset}\n" "$content" "$pad" ""
 }
 
 # -------- header --------
@@ -46,11 +47,12 @@ empty
 
 while IFS= read -r line; do
   # Pad/trim to exactly INNER-1 visible chars (leave 1 for leading space in row())
-  printf "${green}│${reset} ${cyan}${bold}%-*.*s${reset}${green}│${reset}\n" \
+  printf "${blue}│${reset} ${cyan}${bold}%-*.*s${reset}${blue}│${reset}\n" \
     $((INNER - 1)) $((INNER - 1)) "$line"
 done <<< "$HEADER"
 
 empty
+row "                 ${bold}${white}final year compsci @ ucd,${reset} ${yellow}incoming stripe swe${reset}" 62
 mid
 empty
 
