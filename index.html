@@ -66,6 +66,13 @@
             text-overflow: ellipsis;
         }
 
+        .song-mood {
+            font-size: 0.75em;
+            color: #1db954;
+            margin-top: 0.3em;
+            font-style: italic;
+        }
+
         /* Animated Sound Bars */
         .sound-bars {
             display: flex;
@@ -249,7 +256,7 @@
                 <a href="https://linkedin.com/in/cianboyle04">LinkedIn</a>.
             </p>
             <p>
-                <code>curl https://cianb.tech/cc</code>
+                <code>curl cianb.tech/cc</code>
             </p>
 
             <h2>Now Playing</h2>
@@ -259,6 +266,7 @@
                     <div class="song-label">Last listened to</div>
                     <div class="song-title" id="song-name">Loading...</div>
                     <div class="song-artist" id="song-artist"></div>
+                    <div class="song-mood" id="song-mood"></div>
                 </div>
                 <div class="sound-bars">
                     <div class="bar"></div>
@@ -274,23 +282,7 @@
             &copy; cianb, 2026
         </footer>
     </div>
-    <script>
-        fetch('https://spotify-api-lyart.vercel.app/api/spotify')
-            .then(res => res.json())
-            .then(song => {
-                document.getElementById('song-name').textContent = song.name;
-                document.getElementById('song-artist').textContent = song.artist;
-                document.getElementById('album-art').src = song.albumArt;
-                const link = document.getElementById('last-played');
-                link.href = song.url;
-                link.classList.remove('loading');
-                link.classList.add('loaded');
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                document.getElementById('song-name').textContent = 'Could not load song';
-            });
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
